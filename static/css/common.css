@@ -28,6 +28,7 @@ main {
 
 .header {
     height: 50px;
+    margin: 5px 5px 5px 5px;
     display: flex;
     flex-direction: row;
 }
