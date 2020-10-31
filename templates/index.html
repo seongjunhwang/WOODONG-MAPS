@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>WOODONG MAPS</title>
         <!--css file-->
-
+        <link rel="stylesheet" href="../static/common.css" />
         <!--bootstrap css-->
         <link
             rel="stylesheet"
@@ -22,7 +22,7 @@
         ></script>
     </head>
     <body>
-        <div id="map" style="width: 100vw; height: 100vh"></div>
+        <div class="map" id="map"></div>
 
         <script>
             var mapOptions = {
@@ -31,7 +31,6 @@
             };
             var map = new naver.maps.Map("map", mapOptions);
         </script>
-
         <main></main>
     </body>
 </html>
