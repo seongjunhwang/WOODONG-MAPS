@@ -105,6 +105,10 @@ main {
     text-align: right;
 }
 
+.contentCreate {
+    margin: 15px 15px 15px 15px;
+}
+
 .contentDetail {
     padding: 10px 10px 10px 10px;
 }
