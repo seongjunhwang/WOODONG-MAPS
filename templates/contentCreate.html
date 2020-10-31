@@ -36,6 +36,41 @@
             <div class="header">
                 <a href="index.html"><img src="/static/img/goToBack.png" alt="홈 화면으로 이동" /></a>
             </div>
+            <div class="contentCreateHeader">
+                <h1>
+                    교남동 소식들</br>
+                    올려보세요.
+                </h1>
+            </div>
+            <div class="contentCreateBody">
+                <div class="contentCreateLocation">
+                    <label>
+                        교남동 어느 곳의 소식인가요?
+                    </label>
+                    <form action="#">
+                        <button type="button" class="btn btn-outline-primary btn-block">지도에서 찾기</button>
+                    </form>
+                </div>
+                <div class="contentCreateImage">
+                    <label>
+                        사진도 함께 올려보세요.
+                    </label>
+                    <form action="#">
+                        <button type="button" class="btn btn-outline-primary btn-block">사진 선택</button>
+                    </form>
+                </div>
+                <div class="contentCreateTitle">
+                    <input class="form-control" placeholder="제목을 입력해주세요.">                    
+                </div>
+                <div class="contentCreateDesc">
+                    <textarea class="form-control" rows="5" placeholder="내용을 입력해주세요."></textarea>
+                </div>
+            </div>
+            <div class="contentCreateComplete">
+                <form action="/templates/contentCreate.html">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">등록</button>
+                </form>
+            </div>
         </main>
     </body>
 </html>

@@ -107,6 +107,9 @@ main {
 
 .contentCreate {
     margin: 15px 15px 15px 15px;
+    position: fixed;
+    bottom: 0px;
+    width: 28%;
 }
 
 .contentDetail {
@@ -131,4 +134,41 @@ main {
 .contentDetailDesc {
     margin: 15px auto;
     font-size: 15px;
+}
+
+.contentCreateHeader {
+    margin: 15px 15px 30px 15px;
+}
+
+.contentCreateHeader h1 {
+    font-size: 30px;
+    text-align: left;
+    font-weight: normal;
+}
+
+.contentCreateBody {
+    margin: 15px 15px 15px 15px;
+}
+
+.contentCreateLocation {
+    margin: 10px 10px 10px 10px;
+}
+
+.contentCreateImage {
+    margin: 10px 10px 30px 10px;
+}
+
+.contentCreateTitle {
+    margin: 10px 10px 10px 10px;
+}
+
+.contentCreateDesc {
+    margin: 10px 10px 10px 10px;
+}
+
+.contentCreateComplete {
+    margin: 15px 15px 15px 15px;
+    position: fixed;
+    bottom: 0px;
+    width: 28%;
 }
