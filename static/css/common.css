@@ -23,13 +23,21 @@ main {
 }
 
 .header {
-    width: 100vw;
     height: 50px;
     display: flex;
     flex-direction: row;
 }
 
 .logo {
+    width: 15vw;
+    margin: 5px 5px 5px 5px;
+}
+
+.logoImage {
+    padding: 0px 19px 0px 10px;
+}
+.logoText {
+    padding: 10px 5px 5px 5px;
 }
 
 .townSelect {

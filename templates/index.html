@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>WOODONG MAPS</title>
         <!--css file-->
-        <link rel="stylesheet" href="../static/common.css" />
+        <link rel="stylesheet" href="../static/css/common.css" />
         <!--bootstrap css-->
         <link
             rel="stylesheet"
@@ -31,6 +31,20 @@
             };
             var map = new naver.maps.Map("map", mapOptions);
         </script>
-        <main></main>
+        <main>
+            <div class="header">
+                <a href = '/templates/index.html'><img class='logoImage' src = '../static/img/logo.png'></a>
+                <div class="logoText">in</div>
+                <div class="townSelect">
+                    <select class="form-control">
+                        <option>서울시 종로구 교남동</option>
+                        <option>서울시 종로구 교북동</option>
+                        <option>서울시 종로구 홍파동</option>
+                        <option>...</option>
+                    </div>
+                </div>
+            </div>
+            <div class="contentsList"></div>
+        </main>
     </body>
 </html>
