@@ -8,6 +8,10 @@ body {
     */
 }
 
+a {
+    text-decoration: none;
+}
+
 main {
     width: 30vw;
     height: 100vh;
@@ -43,4 +47,63 @@ main {
 .townSelect {
     width: 15vw;
     margin: 5px 10px 5px 20px;
+}
+
+.contentsList {
+    padding: 10px 10px 10px 10px;
+}
+
+.content {
+    height: 150px;
+    border: solid gray 1px;
+    border-radius: 5px;
+    padding: 10px 10px 10px 10px;
+    margin: 10px 10px 10px 10px;
+}
+
+.contentBody {
+    display: flex;
+    flex-direction: row;
+}
+
+.contentTownBadge {
+    width: 100px;
+    border: solid gray 1px;
+    border-radius: 50px;
+    padding: 0px 5px 0px 5px;
+    margin: 0px 0px 10px 0px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.contentBody h5 {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.contentBody p {
+    font-size: 12px;
+}
+
+.contentImage img {
+    width: 100px;
+    height: 100px;
+    border: solid gray 1px;
+}
+
+.contentFooter {
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    color: gray;
+}
+
+.contentCreator {
+    width: 50%;
+    text-align: left;
+}
+
+.contentCreatedTime {
+    width: 50%;
+    text-align: right;
 }
