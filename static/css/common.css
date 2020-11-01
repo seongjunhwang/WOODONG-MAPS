@@ -35,15 +35,20 @@ a {
 }
 
 .logoImage {
-    padding: 0px 19px 0px 10px;
+    padding: 0px 10px 0px 10px;
 }
+
 .logoText {
     padding: 10px 5px 5px 5px;
 }
 
 .townSelect {
-    width: 15vw;
+    width: 10vw;
     margin: 5px 10px 5px 20px;
+}
+
+.myPageImage {
+    margin: 10px 5px 10px 5px;
 }
 
 .contentsList {
@@ -189,4 +194,22 @@ a {
     position: fixed;
     bottom: 0px;
     width: 27%;
+}
+
+.loginHeader {
+    margin: 15px 15px 30px 15px;
+}
+
+.loginHeader h1 {
+    font-size: 30px;
+    text-align: left;
+    font-weight: normal;
+}
+
+.loginBody {
+    margin: 10px 10px 30px 10px;
+}
+
+.join {
+    margin: 10px 10px 30px 10px;
 }
