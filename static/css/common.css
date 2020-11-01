@@ -147,7 +147,7 @@ a {
 }
 
 .contentCreateBody {
-    margin: 15px 15px 100px 15px;
+    margin: 15px 15px 150px 15px;
 }
 
 .contentCreateLocation .contentCreateLocationComplete {
@@ -163,6 +163,11 @@ a {
     margin: 10px 10px 30px 10px;
 }
 
+.contentCreateImageComplete small {
+    text-align: right;
+    color: violet;
+}
+
 .contentCreateTitle .contentCraeteTitleValid {
     margin: 10px 10px 10px 10px;
 }
@@ -175,6 +180,13 @@ a {
 .contentCreateComplete {
     margin: 15px 15px 15px 15px;
     position: fixed;
+    bottom: 50px;
+    width: 27%;
+}
+
+.contentCrateCompleteValid {
+    margin: 15px 15px 15px 15px;
+    position: fixed;
     bottom: 0px;
-    width: 25%;
+    width: 27%;
 }

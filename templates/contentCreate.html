@@ -63,11 +63,8 @@
                         교남동 어느 곳의 소식인가요?
                     </label>
                     <form action="#">
-                        <button type="button" class="btn btn-outline-danger btn-block">지도에서 찾기</button>
+                        <button type="button" class="btn btn-outline-danger btn-block">위치를 입력해주세요.</button>
                     </form>
-                    <div class="invalid-feedback">
-                        위치를 선택해주세요.
-                      </div>
                 </div>
                 <div class="contentCreateImage">
                     <label>
@@ -78,7 +75,11 @@
                     </form>
                 </div>
                 <div class="contentCreateImageComplete">
+                    <label>
+                        사진도 함께 올려보세요.
+                    </label>
                     <img src="/static/img/article_sample.jpg" alt="이미지 샘플" />
+                    <a href="#"><small class="form-text">다시 등록하기</small></a>
                 </div>
                 <div class="contentCreateTitle">
                     <input class="form-control" placeholder="제목을 입력해주세요.">                    
@@ -102,6 +103,11 @@
             <div class="contentCreateComplete">
                 <form action="/templates/contentCreate.html">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">등록</button>
+                </form>
+            </div>
+            <div class="contentCrateCompleteValid">
+                <form action="#">
+                    <button type="submit" class="btn btn-secondary btn-lg btn-block">등록</button>
                 </form>
             </div>
         </main>
