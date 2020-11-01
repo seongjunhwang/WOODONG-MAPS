@@ -51,6 +51,24 @@
                         <button type="button" class="btn btn-outline-primary btn-block">지도에서 찾기</button>
                     </form>
                 </div>
+                <div class="contentCreateLocationComplete">
+                    <label>
+                        교남동 어느 곳의 소식인가요?
+                    </label>
+                    <input class="form-control" type="text" placeholder="37.1231231, 127.123123" readonly>
+                    <a href="#"><small class="form-text">다시 등록하기</small></a>
+                </div>
+                <div class="contentCreateLocationValid">
+                    <label>
+                        교남동 어느 곳의 소식인가요?
+                    </label>
+                    <form action="#">
+                        <button type="button" class="btn btn-outline-danger btn-block">지도에서 찾기</button>
+                    </form>
+                    <div class="invalid-feedback">
+                        위치를 선택해주세요.
+                      </div>
+                </div>
                 <div class="contentCreateImage">
                     <label>
                         사진도 함께 올려보세요.
@@ -59,11 +77,26 @@
                         <button type="button" class="btn btn-outline-primary btn-block">사진 선택</button>
                     </form>
                 </div>
+                <div class="contentCreateImageComplete">
+                    <img src="/static/img/article_sample.jpg" alt="이미지 샘플" />
+                </div>
                 <div class="contentCreateTitle">
                     <input class="form-control" placeholder="제목을 입력해주세요.">                    
                 </div>
+                <div class="contentCreateTitleValid">
+                    <input class="form-control is-invalid" placeholder="제목을 입력해주세요.">                    
+                    <div class="invalid-feedback">
+                        제목을 입력해주세요.
+                    </div>
+                </div>
                 <div class="contentCreateDesc">
                     <textarea class="form-control" rows="5" placeholder="내용을 입력해주세요."></textarea>
+                </div>
+                <div class="contentCreatDescValid">
+                    <textarea class="form-control is-invalid" rows="5" placeholder="내용을 입력해주세요." required></textarea>
+                    <div class="invalid-feedback">
+                        내용을 입력해주세요.
+                    </div>
                 </div>
             </div>
             <div class="contentCreateComplete">

@@ -3,18 +3,18 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: row;
-    /*
     overflow: hidden;
-    */
 }
 
 main {
     width: 30vw;
     height: 100vh;
-    /*
     overflow-x: hidden;
     overflow-y: scroll;
-    */
+}
+
+a {
+    text-decoration: none;
 }
 
 .map {
@@ -147,28 +147,34 @@ main {
 }
 
 .contentCreateBody {
-    margin: 15px 15px 15px 15px;
+    margin: 15px 15px 100px 15px;
 }
 
-.contentCreateLocation {
+.contentCreateLocation .contentCreateLocationComplete {
     margin: 10px 10px 10px 10px;
 }
 
-.contentCreateImage {
+.contentCreateLocationComplete small {
+    text-align: right;
+    color: violet;
+}
+
+.contentCreateImage .contentCreateImageComplete {
     margin: 10px 10px 30px 10px;
 }
 
-.contentCreateTitle {
+.contentCreateTitle .contentCraeteTitleValid {
     margin: 10px 10px 10px 10px;
 }
 
-.contentCreateDesc {
+.contentCreateDesc .contentCreatDescValid {
     margin: 10px 10px 10px 10px;
+    overflow-y: hidden;
 }
 
 .contentCreateComplete {
     margin: 15px 15px 15px 15px;
     position: fixed;
     bottom: 0px;
-    width: 28%;
+    width: 25%;
 }
