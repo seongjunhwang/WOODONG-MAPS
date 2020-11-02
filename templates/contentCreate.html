@@ -1,115 +1,132 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>WOODONG MAPS</title>
-        <!--css file-->
-        <link rel="stylesheet" href="../static/css/common.css" />
-        <!--bootstrap css-->
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-            integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
-            crossorigin="anonymous"
-        />
-        <!--googlefont api-->
 
-        <!--navermaps api-->
-        <script
-            type="text/javascript"
-            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=5h7phq9a8i"
-        ></script>
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WOODONG MAPS</title>
+    <!--css file-->
+    <link rel="stylesheet" href="../static/css/common.css" />
+    <!--bootstrap css-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous" />
+    <!--googlefont api-->
 
-    <body>
-        <div class="map" id="map">
-            <script>
-                var mapOptions = {
-                    center: new naver.maps.LatLng(37.3595704, 127.105399),
-                    zoom: 16,
-                };
-                var map = new naver.maps.Map("map", mapOptions);
-            </script>
+    <!--navermaps api-->
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=5h7phq9a8i">
+    </script>
+
+</head>
+
+<body>
+    <div class="map" id="map">
+        <script>
+            var mapOptions = {
+                center: new naver.maps.LatLng(37.3595704, 127.105399),
+                zoom: 16,
+            };
+            var map = new naver.maps.Map("map", mapOptions);
+        </script>
+    </div>
+    <main>
+        <div class="header">
+            <a href="index.html"><img src="/static/img/goToBack.png" alt="홈 화면으로 이동" /></a>
         </div>
-        <main>
-            <div class="header">
-                <a href="index.html"><img src="/static/img/goToBack.png" alt="홈 화면으로 이동" /></a>
-            </div>
-            <div class="contentCreateHeader">
-                <h1>
-                    교남동 소식들</br>
-                    올려보세요.
-                </h1>
-            </div>
-            <div class="contentCreateBody">
-                <div class="contentCreateLocation">
-                    <label>
-                        교남동 어느 곳의 소식인가요?
-                    </label>
-                    <form action="#">
-                        <button type="button" class="btn btn-outline-primary btn-block">지도에서 찾기</button>
-                    </form>
-                </div>
-                <div class="contentCreateLocationComplete">
-                    <label>
-                        교남동 어느 곳의 소식인가요?
-                    </label>
-                    <input class="form-control" type="text" placeholder="37.1231231, 127.123123" readonly>
-                    <a href="#"><small class="form-text">다시 등록하기</small></a>
-                </div>
-                <div class="contentCreateLocationValid">
-                    <label>
-                        교남동 어느 곳의 소식인가요?
-                    </label>
-                    <form action="#">
-                        <button type="button" class="btn btn-outline-danger btn-block">위치를 입력해주세요.</button>
-                    </form>
-                </div>
-                <div class="contentCreateImage">
-                    <label>
-                        사진도 함께 올려보세요.
-                    </label>
-                    <form action="#">
-                        <button type="button" class="btn btn-outline-primary btn-block">사진 선택</button>
-                    </form>
-                </div>
-                <div class="contentCreateImageComplete">
-                    <label>
-                        사진도 함께 올려보세요.
-                    </label>
-                    <img src="/static/img/article_sample.jpg" alt="이미지 샘플" />
-                    <a href="#"><small class="form-text">다시 등록하기</small></a>
-                </div>
-                <div class="contentCreateTitle">
-                    <input class="form-control" placeholder="제목을 입력해주세요.">                    
-                </div>
-                <div class="contentCreateTitleValid">
-                    <input class="form-control is-invalid" placeholder="제목을 입력해주세요.">                    
-                    <div class="invalid-feedback">
-                        제목을 입력해주세요.
-                    </div>
-                </div>
-                <div class="contentCreateDesc">
-                    <textarea class="form-control" rows="5" placeholder="내용을 입력해주세요."></textarea>
-                </div>
-                <div class="contentCreatDescValid">
-                    <textarea class="form-control is-invalid" rows="5" placeholder="내용을 입력해주세요." required></textarea>
-                    <div class="invalid-feedback">
-                        내용을 입력해주세요.
-                    </div>
-                </div>
-            </div>
-            <div class="contentCreateComplete">
-                <form action="/templates/contentCreate.html">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">등록</button>
+        <div class="contentCreateHeader">
+            <h1>
+                교남동 소식들</br>
+                올려보세요.
+            </h1>
+        </div>
+        <div class="contentCreateBody">
+            <div id="location" class="contentCreateLocation">
+                <label>
+                    교남동 어느 곳의 소식인가요?
+                </label>
+                <form action="">
+                    <button type="button" class="btn btn-outline-primary btn-block" onclick="getLocation()">지도에서
+                        찾기</button>
                 </form>
             </div>
-            <div class="contentCrateCompleteValid">
+
+            <script>
+                let x = document.getElementById("location");
+
+                function getLocation() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(showPosition);
+                    } else {
+                        x.innerHTML = "위치를 불러오는 데 실패하였습니다.";
+                    }
+                }
+
+                function showPosition(position) {
+                    x.innerHTML = `
+                        <label>
+                            교남동 어느 곳의 소식인가요?
+                        </label>
+                        <input class="form-control" type="text"
+                            placeholder="${position.coords.latitude}, ${position.coords.longitude}" readonly>
+                        <a href="#"> <small class="form-text" style= "text-align:right ; color:violet">다시 등록하기</small></a>
+                    `;
+                }
+            </script>
+
+            <div class="contentCreateLocationComplete">
+            </div>
+            <div class="contentCreateLocationValid">
+                <label>
+                    교남동 어느 곳의 소식인가요?
+                </label>
                 <form action="#">
-                    <button type="submit" class="btn btn-secondary btn-lg btn-block">등록</button>
+                    <button type="button" class="btn btn-outline-danger btn-block">위치를 입력해주세요.</button>
                 </form>
             </div>
-        </main>
-    </body>
+            <div class="contentCreateImage">
+                <label>
+                    사진도 함께 올려보세요.
+                </label>
+                <form action="#">
+                    <button type="button" class="btn btn-outline-primary btn-block">사진 선택</button>
+                </form>
+            </div>
+            <div class="contentCreateImageComplete">
+                <label>
+                    사진도 함께 올려보세요.
+                </label>
+                <img src="/static/img/article_sample.jpg" alt="이미지 샘플" />
+                <a href="#"><small class="form-text">다시 등록하기</small></a>
+            </div>
+            <div class="contentCreateTitle">
+                <input class="form-control" placeholder="제목을 입력해주세요.">
+            </div>
+            <div class="contentCreateTitleValid">
+                <input class="form-control is-invalid" placeholder="제목을 입력해주세요.">
+                <div class="invalid-feedback">
+                    제목을 입력해주세요.
+                </div>
+            </div>
+            <div class="contentCreateDesc">
+                <textarea class="form-control" rows="5" placeholder="내용을 입력해주세요."></textarea>
+            </div>
+            <div class="contentCreatDescValid">
+                <textarea class="form-control is-invalid" rows="5" placeholder="내용을 입력해주세요." required></textarea>
+                <div class="invalid-feedback">
+                    내용을 입력해주세요.
+                </div>
+            </div>
+        </div>
+        <div class="contentCreateComplete">
+            <form action="/templates/contentCreate.html">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">등록</button>
+            </form>
+        </div>
+        <div class="contentCrateCompleteValid">
+            <form action="#">
+                <button type="submit" class="btn btn-secondary btn-lg btn-block">등록</button>
+            </form>
+        </div>
+    </main>
+</body>
+
 </html>
