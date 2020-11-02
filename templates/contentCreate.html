@@ -16,6 +16,7 @@
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=5h7phq9a8i">
     </script>
 
+
 </head>
 
 <body>
@@ -48,7 +49,6 @@
                         찾기</button>
                 </form>
             </div>
-
             <script>
                 let x = document.getElementById("location");
 
@@ -72,8 +72,7 @@
                 }
             </script>
 
-            <div class="contentCreateLocationComplete">
-            </div>
+            <!--
             <div class="contentCreateLocationValid">
                 <label>
                     교남동 어느 곳의 소식인가요?
@@ -82,21 +81,62 @@
                     <button type="button" class="btn btn-outline-danger btn-block">위치를 입력해주세요.</button>
                 </form>
             </div>
-            <div class="contentCreateImage">
+-->
+            <div id="image" class="contentCreateImage">
                 <label>
                     사진도 함께 올려보세요.
                 </label>
                 <form action="#">
-                    <button type="button" class="btn btn-outline-primary btn-block">사진 선택</button>
+                    <input type="file" id="inputImage" accept="img/*" required multiple>
+                    <button type="button" id="inputImageBtn" class="btn btn-outline-primary btn-block">사진 선택</button>
                 </form>
             </div>
+
             <div class="contentCreateImageComplete">
                 <label>
                     사진도 함께 올려보세요.
                 </label>
-                <img src="/static/img/article_sample.jpg" alt="이미지 샘플" />
+                <img id="contentImage" src="#" alt="이미지 샘플" />
                 <a href="#"><small class="form-text">다시 등록하기</small></a>
             </div>
+
+            <script>
+                let y = document.getElementById("image");
+                let inputImageBtn = document.querySelector('#inputImageBtn');
+                let inputImage = document.querySelector('#inputImage');
+                let contentImage = document.querySelector("#contentImage");
+                let reader = new FileReader();
+
+                inputImageBtn.addEventListener("click", () => {
+                    inputImage.click();
+                });
+                // 버튼 클릭 시 input 클릭
+
+                reader.onload = (readerEvent) => {
+                    contentImage.setAttribute('src', readerEvent.target.result);
+                };
+                // 업로드 이미지 미리보기
+
+                inputImage.addEventListener("change", (changeEvent) => {
+                    let imgFile = changeEvent.target.files[0];
+                    reader.readAsDataURL(imgFile);
+                    //showImage(contentImage);
+                });
+                // input에 이벤트 있을 때 이미지파일 조회
+
+
+                function showImage(contentImage) {
+                    y.innerHTML = `
+                    <label>
+                        사진도 함께 올려보세요.
+                    </label>
+                    <img id="${contentImage}" src="#" alt="이미지 샘플" />
+                    <a href="#"><small class="form-text">다시 등록하기</small></a>
+                    `;
+                }
+            </script>
+
+
             <div class="contentCreateTitle">
                 <input class="form-control" placeholder="제목을 입력해주세요.">
             </div>

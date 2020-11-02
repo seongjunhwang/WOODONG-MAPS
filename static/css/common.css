@@ -163,6 +163,10 @@ a {
     margin: 10px 10px 30px 10px;
 }
 
+.contentCreateImage input {
+    display: none;
+}
+
 .contentCreateImageComplete small {
     text-align: right;
     color: violet;
