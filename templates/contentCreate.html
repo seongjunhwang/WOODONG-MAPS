@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WOODONG MAPS</title>
+    <!--ajax-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!--css file-->
     <link rel="stylesheet" href="../static/css/common.css" />
     <!--bootstrap css-->
@@ -15,7 +17,35 @@
     <!--navermaps api-->
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=5h7phq9a8i">
     </script>
+    <script>
+        function contentCreate() {
 
+            let position = document.getElementById("position").getAttribute("placeholder");
+            let positionArray = position.split(", ")
+            let lat = positionArray[0];
+            let lng = positionArray[1];
+            let image = document.getElementById("contentImage").getAttribute("src");
+            let title = document.getElementById("contentTitle").value;
+            let desc = document.getElementById("contentDesc").value;
+
+            $.ajax({
+                type: "POST",
+                url: "/api/contents",
+                data: {
+                    'lat': lat,
+                    'lng': lng,
+                    'image': image,
+                    'title': title,
+                    'desc': desc
+                },
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        alert(response["msg"]);
+                    }
+                }
+            })
+        }
+    </script>
 
 </head>
 
@@ -65,7 +95,7 @@
                         <label>
                             교남동 어느 곳의 소식인가요?
                         </label>
-                        <input class="form-control" type="text"
+                        <input class="form-control" type="text" id="position"
                             placeholder="${position.coords.latitude}, ${position.coords.longitude}" readonly>
                         <a href="#"> <small class="form-text" style= "text-align:right ; color:violet">다시 등록하기</small></a>
                     `;
@@ -99,7 +129,6 @@
                 <img id="contentImage" src="#" alt="이미지 샘플" />
                 <a href="#"><small class="form-text">다시 등록하기</small></a>
             </div>
-
             <script>
                 let y = document.getElementById("image");
                 let inputImageBtn = document.querySelector('#inputImageBtn');
@@ -136,36 +165,41 @@
                 }
             </script>
 
-
             <div class="contentCreateTitle">
-                <input class="form-control" placeholder="제목을 입력해주세요.">
+                <input id="contentTitle" class="form-control" placeholder="제목을 입력해주세요.">
             </div>
+            <!--
             <div class="contentCreateTitleValid">
                 <input class="form-control is-invalid" placeholder="제목을 입력해주세요.">
                 <div class="invalid-feedback">
                     제목을 입력해주세요.
                 </div>
             </div>
+            -->
             <div class="contentCreateDesc">
-                <textarea class="form-control" rows="5" placeholder="내용을 입력해주세요."></textarea>
+                <textarea id="contentDesc" class="form-control" rows="5" placeholder="내용을 입력해주세요."></textarea>
             </div>
+            <!--
             <div class="contentCreatDescValid">
                 <textarea class="form-control is-invalid" rows="5" placeholder="내용을 입력해주세요." required></textarea>
                 <div class="invalid-feedback">
                     내용을 입력해주세요.
                 </div>
             </div>
+        -->
         </div>
         <div class="contentCreateComplete">
-            <form action="/templates/contentCreate.html">
-                <button type="submit" class="btn btn-primary btn-lg btn-block">등록</button>
+            <form action="#">
+                <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="contentCreate()">등록</button>
             </form>
         </div>
+        <!--
         <div class="contentCrateCompleteValid">
             <form action="#">
                 <button type="submit" class="btn btn-secondary btn-lg btn-block">등록</button>
             </form>
         </div>
+-->
     </main>
 </body>
 
