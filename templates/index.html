@@ -54,6 +54,8 @@
             window.location.href = '/'
         }
     </script>
+
+
 </head>
 
 <body>
@@ -70,7 +72,7 @@
         <div class="header">
             <a href="/"><img class="logoImage" src="../static/img/logo.png" /></a>
             <div class="logoText">in</div>
-            <div class="townSelect">
+            <div id="location" class="townSelect">
                 <select class="form-control">
                     <option>종로구 교남동</option>
                     <option>종로구 홍파동</option>
@@ -78,6 +80,28 @@
                     <option>...</option>
                 </select>
             </div>
+            <script>
+                let x = document.getElementById("location");
+
+                $(document).ready(
+                    function getLocation() {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(showPosition);
+                        } else {
+                            x.innerHTML = "위치를 불러오는 데 실패하였습니다.";
+                        }
+                    }
+                );
+
+                function showPosition(position) {
+                    x.innerHTML = `
+                    <select class="form-control">
+                        <option>${position.coords.latitude}, ${position.coords.longitude}</option>
+                        <option>...</option>
+                    </select>
+                `;
+                }
+            </script>
             <div id="myPage" class="myPage">
                 <a href="/login">
                     <img class="myPageImage" src="../static/img/myPage.png" />
