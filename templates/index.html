@@ -1,86 +1,122 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>WOODONG MAPS</title>
-        <!--css file-->
-        <link rel="stylesheet" href="../static/css/common.css" />
-        <!--bootstrap css-->
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-            integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
-            crossorigin="anonymous"
-        />
-        <!--googlefont api-->
 
-        <!--navermaps api-->
-        <script
-            type="text/javascript"
-            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=5h7phq9a8i"
-        ></script>
-    </head>
-    <body>
-        <div class="map" id="map">
-            <script>
-                var mapOptions = {
-                    center: new naver.maps.LatLng(37.3595704, 127.105399),
-                    zoom: 16,
-                };
-                var map = new naver.maps.Map("map", mapOptions);
-            </script>
-        </div>
-        <main>
-            <div class="header">
-                <a href="/templates/index.html"><img class="logoImage" src="../static/img/logo.png" /></a>
-                <div class="logoText">in</div>
-                <div class="townSelect">
-                    <select class="form-control">
-                        <option>종로구 교남동</option>
-                        <option>종로구 홍파동</option>
-                        <option>종로구 교북동</option>
-                        <option>...</option>
-                    </select>
-                </div>
-                <div class="myPage">
-                    <a href="/templates/login.html">
-                        <img class="myPageImage" src="../static/img/myPage.png" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WOODONG MAPS</title>
+    <!--ajax-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--css file-->
+    <link rel="stylesheet" href="../static/css/common.css" />
+    <!--bootstrap css-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous" />
+    <!--googlefont api-->
+
+    <!--navermaps api-->
+    <script type="text/javascript"
+        src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=5h7phq9a8i"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>
+        // 로딩 후 바로 실행
+        $(document).ready(function () {
+            let myPage = document.getElementById("myPage");
+            if ($.cookie('mytoken') == undefined) {
+                // mytoken이라는 값으로 쿠키가 없으면, 홈으로 이동시킵니다.
+                myPage.innerHTML = `
+                    <a href="/login">
+                        로그인
                     </a>
-                </div>
+                `;
+            } else {
+                // 쿠기가 있으면, 로그아웃을 시킵니다.
+                myPage.innerHTML = `
+                    <a href="#" onclick="logout()">
+                        로그아웃
+                    </a>
+                `;
+            }
+        });
+
+        // 로그아웃은 내가 가지고 있는 토큰만 쿠키에서 없애면 됩니다.
+        function logout() {
+            $.removeCookie('mytoken');
+            alert('로그아웃!')
+            window.location.href = '/'
+        }
+    </script>
+</head>
+
+<body>
+    <div class="map" id="map">
+        <script>
+            var mapOptions = {
+                center: new naver.maps.LatLng(37.3595704, 127.105399),
+                zoom: 16,
+            };
+            var map = new naver.maps.Map("map", mapOptions);
+        </script>
+    </div>
+    <main>
+        <div class="header">
+            <a href="/"><img class="logoImage" src="../static/img/logo.png" /></a>
+            <div class="logoText">in</div>
+            <div class="townSelect">
+                <select class="form-control">
+                    <option>종로구 교남동</option>
+                    <option>종로구 홍파동</option>
+                    <option>종로구 교북동</option>
+                    <option>...</option>
+                </select>
             </div>
-            <div class="contentsList">
-                <div class="content">
-                    <a href="content.html">
-                        <div class="contentBody">
-                            <div class="contentText">
-                                <div class="contentTownBadge">교남동</div>
-                                <div class="contentTitle">
-                                    <h5>제목입니다.</h5>
-                                </div>
-                                <div class="contentDesc">
-                                    <p>
-                                        내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다.
-                                        내용입니다. 내용입니다.
-                                    </p>
-                                </div>
+            <div id="myPage" class="myPage">
+                <a href="/login">
+                    <img class="myPageImage" src="../static/img/myPage.png" />
+                </a>
+            </div>
+        </div>
+        <div class="contentsList">
+            <div class="content">
+                <a href="/content">
+                    <div class="contentBody">
+                        <div class="contentText">
+                            <div class="contentTownBadge">교남동</div>
+                            <div class="contentTitle">
+                                <h5>제목입니다.</h5>
                             </div>
-                            <div class="contentImage">
-                                <img src="/static/img/article_sample.jpg" alt="이미지 샘플" />
+                            <div class="contentDesc">
+                                <p>
+                                    내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다.
+                                    내용입니다. 내용입니다.
+                                </p>
                             </div>
                         </div>
-                    </a>
-                    <div class="contentFooter">
-                        <div class="contentCreator">교남동이장님</div>
-                        <div class="contentCreatedTime">2020-10-03 오전 11:02</div>
+                        <div class="contentImage">
+                            <img src="/static/img/article_sample.jpg" alt="이미지 샘플" />
+                        </div>
                     </div>
+                </a>
+                <div class="contentFooter">
+                    <div class="contentCreator">교남동이장님</div>
+                    <div class="contentCreatedTime">2020-10-03 오전 11:02</div>
                 </div>
             </div>
-            <div class="contentCreate">
-                <form action="/templates/contentCreate.html">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">우리 동네 소식 등록</button>
-                </form>
-            </div>
-        </main>
-    </body>
+        </div>
+        <div class="contentCreate">
+            <form action="create">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">우리 동네 소식 등록</button>
+            </form>
+        </div>
+    </main>
+</body>
+
 </html>

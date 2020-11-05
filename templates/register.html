@@ -18,7 +18,6 @@
     <script type="text/javascript"
         src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=5h7phq9a8i"></script>
 
-    <!-- 쿠키 사용을 위한 Jquery-cookie 임포트 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -29,26 +28,18 @@
         crossorigin="anonymous"></script>
 
     <script>
-        // ['쿠키'라는 개념에 대해 알아봅시다]
-        // 로그인을 구현하면, 반드시 쿠키라는 개념을 사용합니다.
-        // 페이지에 관계없이 브라우저에 임시로 저장되는 정보입니다. 키:밸류 형태(딕셔너리 형태)로 저장됩니다.
-        // 쿠키가 있기 때문에, 한번 로그인하면 네이버에서 다시 로그인할 필요가 없는 것입니다.
-        // 브라우저를 닫으면 자동 삭제되게 하거나, 일정 시간이 지나면 삭제되게 할 수 있습니다.
-        function login() {
+        // 간단한 회원가입 함수입니다.
+        // 아이디, 비밀번호, 닉네임을 받아 DB에 저장합니다.
+        function register() {
             $.ajax({
                 type: "POST",
-                url: "/api/login",
+                url: "/api/register",
                 data: { id_give: $('#userid').val(), pw_give: $('#userpw').val() },
                 success: function (response) {
                     if (response['result'] == 'success') {
-                        // 로그인이 정상적으로 되면, 토큰을 받아옵니다.
-                        // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장합니다.
-                        $.cookie('mytoken', response['token']);
-
-                        alert('로그인 완료!')
-                        window.location.href = '/'
+                        alert('회원가입이 완료되었습니다.')
+                        window.location.href = '/login'
                     } else {
-                        // 로그인이 안되면 에러메시지를 띄웁니다.
                         alert(response['msg'])
                     }
                 }
@@ -56,10 +47,7 @@
         }
 
     </script>
-
 </head>
-
-
 
 <body>
     <div class="map" id="map">
@@ -75,51 +63,24 @@
         <div class="header">
             <a href="/"><img src="/static/img/goToBack.png" alt="홈 화면으로 이동" /></a>
         </div>
-        <div class="loginHeader">
+        <div class="joinHeader">
             <h1>
-                동네에 일어나는 일을</br>
-                공유해볼까요?
+                회원가입
             </h1>
         </div>
-        <div class="loginBody">
+        <div class="joinBody">
             <label>
-                먼저 로그인이 필요합니다.
+                아이디와 비밀번호를 입력해주세요.
             </label>
-            <div class="loginInputId">
+            <div class="joinInputId">
                 <input id="userid" class="form-control" placeholder="아이디를 입력해주세요.">
             </div>
-            <!--
-            <div class="loginInputIdValid">
-                <input class="form-control is-invalid" placeholder="이메일을 입력해주세요.">
-                <div class="invalid-feedback">
-                    이메일을 입력해주세요.
-                </div>
-            </div>
-            -->
-            <div class="loginInputPassword">
+            <div class="joinInputPassword">
                 <input id="userpw" type="password" class="form-control" placeholder="비밀번호를 입력해주세요.">
             </div>
-            <!--
-            <div class="loginInputPasswordValid">
-                <input type="password" class="form-control is-invalid" placeholder="비밀번호를 입력해주세요.">
-                <div class="invalid-feedback">
-                    비밀번호를 입력해주세요.
-                </div>
-            </div>
-            -->
-            <div class="loginStart">
-                <form action="#">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="login()">로그인</button>
-                </form>
-            </div>
-        </div>
-        <div class="join">
-            <label>
-                처음 방문이라면 회원가입을 해주세요.
-            </label>
             <div class="joinStart">
-                <form action="/register">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">회원가입</button>
+                <form action="#">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="register()">회원가입</button>
                 </form>
             </div>
         </div>
