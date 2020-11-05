@@ -212,3 +212,17 @@ a {
 .join {
     margin: 10px 10px 30px 10px;
 }
+
+.joinHeader {
+    margin: 15px 15px 30px 15px;
+}
+
+.joinHeader h1 {
+    font-size: 30px;
+    text-align: left;
+    font-weight: normal;
+}
+
+.joinBody {
+    margin: 10px 10px 30px 10px;
+}
