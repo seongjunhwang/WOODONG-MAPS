@@ -182,13 +182,25 @@
             </div>
             <script>
                 let x = document.getElementById("location");
+
                 function showPosition(position) {
-                    x.innerHTML = `
-                    <select class="form-control">
-                        <option>${position.coords.latitude}, ${position.coords.longitude}</option>
-                        <option>...</option>
-                    </select>
-                `;
+                    $.ajax({
+                        type: "GET",
+                        url: `/api/coordsToAddress/${position.coords.longitude},${position.coords.latitude}`,
+                        data: {},
+                        success: function (response) {
+                            address1 = response.address.results[1].region.area1.name
+                            address2 = response.address.results[1].region.area2.name
+                            address3 = response.address.results[1].region.area3.name
+                            x.innerHTML = `
+                                <select class="form-control">
+                                    <option>${address3}</option>
+                                </select>
+                            `;
+                        }
+                    }
+                    )
+
                 }
             </script>
             <div id="myPage" class="myPage">

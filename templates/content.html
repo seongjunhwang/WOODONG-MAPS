@@ -24,7 +24,6 @@
         console.log(myParam)
     </script>
     <script>
-
         $.ajax({
             type: "GET",
             url: "/api/contents",
@@ -56,7 +55,7 @@
                             <hr />
                             <div class="contentDetailBody">
                                 <div class="contentDetailImage">
-                                    <img src="/static/img/article_sample.jpg" alt="이미지 샘플" />
+                                    <img src="${image}">
                                 </div>
                                 <div class="contentDetailDesc">
                                     <p>${desc}</p>
@@ -70,9 +69,6 @@
                             <hr />
                         `;
                         $('#contentDetail').append(tempHtml);
-                    } else {
-                        alert("콘텐츠를 조회하는데 실패했습니다.");
-                        return;
                     }
                 }
             }

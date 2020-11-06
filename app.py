@@ -4,6 +4,8 @@ import jwt
 from pymongo import MongoClient
 from flask import Flask, render_template, jsonify, request, session, redirect, url_for
 import uuid
+import json
+import requests
 
 app = Flask(__name__)
 
@@ -154,6 +156,31 @@ def api_read_contents():
         {}, {'_id': 0}).sort('createdtime', -1))
 
     return jsonify({'result': 'success', 'contents_list': contents})
+
+
+@app.route('/api/coordsToAddress/<coords>', methods=['GET'])
+def api_coords_to_address(coords):
+
+    client_id = '5h7phq9a8i'
+    client_secret = 'zmXRdAWu3QSyafJEneva4vKY3AXN2TRZdKtrXSU7'
+
+    headers = {
+        'X-NCP-APIGW-API-KEY-ID': client_id,
+        'X-NCP-APIGW-API-KEY': client_secret
+    }
+
+    params = (
+        ('request', 'coordsToaddr'),
+        ('coords', coords),
+        ('sourcecrs', 'epsg:4326'),
+        ('output', 'json'),
+        ('orders', 'legalcode,admcode'),
+    )
+
+    response = requests.get(
+        'https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc', headers=headers, params=params)
+
+    return jsonify({'result': 'success', 'address': response.json()})
 
 
 if __name__ == '__main__':
