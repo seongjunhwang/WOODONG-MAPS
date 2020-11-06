@@ -36,7 +36,7 @@
                 window.location.href = '/login'
             } else {
                 // 쿠기가 있으면, 유저 정보를 불러옵니다.
-                load_user_info()
+                return;
             }
         });
 
@@ -182,7 +182,7 @@
                     <button type="button" id="inputImageBtn" class="btn btn-outline-primary btn-block">사진 선택</button>
                 </form>
             </div>
-
+            <!--
             <div class="contentCreateImageComplete">
                 <label>
                     사진도 함께 올려보세요.
@@ -190,11 +190,11 @@
                 <img id="contentImage" src="#" alt="이미지 샘플" />
                 <a href="#"><small class="form-text">다시 등록하기</small></a>
             </div>
+            -->
             <script>
                 let y = document.getElementById("image");
                 let inputImageBtn = document.querySelector('#inputImageBtn');
                 let inputImage = document.querySelector('#inputImage');
-                let contentImage = document.querySelector("#contentImage");
                 let reader = new FileReader();
 
                 inputImageBtn.addEventListener("click", () => {
@@ -202,27 +202,31 @@
                 });
                 // 버튼 클릭 시 input 클릭
 
-                reader.onload = (readerEvent) => {
-                    contentImage.setAttribute('src', readerEvent.target.result);
-                };
-                // 업로드 이미지 미리보기
+
 
                 inputImage.addEventListener("change", (changeEvent) => {
                     let imgFile = changeEvent.target.files[0];
                     reader.readAsDataURL(imgFile);
-                    //showImage(contentImage);
+                    showImage();
                 });
+                // 업로드 이미지 미리보기
+
+
+                reader.onload = (readerEvent) => {
+                    contentImage.setAttribute('src', readerEvent.target.result)
+                };
                 // input에 이벤트 있을 때 이미지파일 조회
 
 
-                function showImage(contentImage) {
+                function showImage() {
                     y.innerHTML = `
                     <label>
                         사진도 함께 올려보세요.
                     </label>
-                    <img id="${contentImage}" src="#" alt="이미지 샘플" />
+                    <img id="contentImage" src="#" alt="이미지 샘플" />
                     <a href="#"><small class="form-text">다시 등록하기</small></a>
                     `;
+                    let contentImage = document.querySelector('#contentImage');
                 }
             </script>
 
