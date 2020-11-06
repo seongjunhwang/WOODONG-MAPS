@@ -91,6 +91,62 @@
             alert('로그아웃!')
             window.location.href = '/'
         }
+
+
+        $(document).ready(
+            function showContents() {
+                $.ajax({
+                    type: "GET",
+                    url: "api/contents",
+                    data: {},
+                    success: function (response) {
+
+                        let contents = response['contents_list']
+
+                        for (let i = 0; i < contents.length; i++) {
+                            let content = contents[i]
+                            let latitude = content['latitude']
+                            let longitude = content['longitude']
+                            let image = content['image']
+                            let title = content['title']
+                            let desc = content['desc']
+                            let usernick = content['usernick']
+                            let createdtime = content['createdtime']
+
+                            let tempHtml = `
+                                <div class="content">
+                                    <a href="/content">
+                                        <div class="contentBody">
+                                            <div class="contentText">
+                                                <div class="contentTownBadge">
+                                                    교남동
+                                                </div>
+                                                <div class="contentTitle">
+                                                    <h5>${title}</h5>
+                                                </div>
+                                                <div class="contentDesc">
+                                                    <p>
+                                                        ${desc}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                                <div class="contentImage">
+                                                    <img src="${image}">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    <div class="contentFooter">
+                                        <div class="contentCreator">${usernick}</div>
+                                        <div class="contentCreatedTime">${createdtime}</div>
+                                    </div>
+                                </div>
+                                `
+                            $('#contentsList').append(tempHtml)
+                        }
+                    }
+                })
+            }
+        );
     </script>
 
 
@@ -173,7 +229,7 @@
                 </a>
             </div>
         </div>
-        <div class="contentsList">
+        <div id="contentsList" class="contentsList">
             <div class="content">
                 <a href="/content">
                     <div class="contentBody">

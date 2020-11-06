@@ -148,14 +148,14 @@ def api_create_contents():
     return jsonify({'result': 'success', 'msg': '게시글 등록이 완료되었습니다.'})
 
 
-'''
 @app.route('/api/contents', methods=['GET'])
 def api_read_contents():
-    
-    contents = list(db.contents.find({},{'_id' : false}).sort(''))
 
-    return jsonify({'result': 'success', 'msg': '리스트 조회가 완료되었습니다.'})
-'''
+    contents = list(db.contents.find(
+        {}, {'_id': 0}).sort('createdtime', -1))
+
+    return jsonify({'result': 'success', 'contents_list': contents})
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
