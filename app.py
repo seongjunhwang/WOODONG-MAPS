@@ -42,8 +42,8 @@ def contents():
 # 저장하기 전에, pw를 sha256 방법(=단방향 암호화. 풀어볼 수 없음)으로 암호화해서 저장합니다.
 
 
-@app.route('/api/register', methods=['POST'])
-def api_register():
+@app.route('/api/users', methods=['POST'])
+def api_users():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
     nickname_receive = request.form['nickname_give']
