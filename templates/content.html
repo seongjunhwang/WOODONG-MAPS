@@ -23,6 +23,61 @@
         let myParam = urlParams.get('id')
         console.log(myParam)
     </script>
+    <script>
+
+        $.ajax({
+            type: "GET",
+            url: "/api/contents",
+            data: {},
+            success: function (response) {
+                let contents = response['contents_list']
+                for (let i = 0; i < contents.length; i++) {
+                    let content = contents[i]
+                    if (content['contentid'] === myParam) {
+                        let contentid = content['contentid'];
+                        let latitude = content['latitude'];
+                        let longitude = content['longitude'];
+                        let image = content['image'];
+                        let title = content['title'];
+                        let desc = content['desc'];
+                        let usernick = content['usernick'];
+                        let createdtime = content['createdtime'];
+                        let tempHtml = `
+                            <div class="contentDetailHeader">
+                                <div class="contentDetailTownBadge">교남동</div>
+                                <div class="contentDetailTitle">
+                                    <h5>${title}</h5>
+                                </div>
+                                <div class="contentDetailFooter">
+                                    <div class="contentDetailCreator">${usernick}</div>
+                                    <div class="contentDetailCreatedTime">${createdtime}</div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="contentDetailBody">
+                                <div class="contentDetailImage">
+                                    <img src="/static/img/article_sample.jpg" alt="이미지 샘플" />
+                                </div>
+                                <div class="contentDetailDesc">
+                                    <p>${desc}</p>
+                                </div>
+                                <div id="contentDetailLocation" class="contentDetailLocation">
+                                    <label>
+                                        ${latitude}, ${longitude}
+                                    </label>
+                                </div>
+                            </div>
+                            <hr />
+                        `;
+                        $('#contentDetail').append(tempHtml);
+                    } else {
+                        alert("콘텐츠를 조회하는데 실패했습니다.");
+                        return;
+                    }
+                }
+            }
+        })
+    </script>
 </head>
 
 <body>
@@ -75,7 +130,8 @@
         <div class="header">
             <a href="/"><img src="/static/img/goToBack.png" alt="홈 화면으로 이동" /></a>
         </div>
-        <div class="contentDetail">
+        <div id="contentDetail" class="contentDetail">
+            <!--
             <div class="contentDetailHeader">
                 <div class="contentDetailTownBadge">교남동</div>
                 <div class="contentDetailTitle">
@@ -98,13 +154,14 @@
                         내용입니다.
                     </p>
                 </div>
-                <div class="contentDetailLocation">
+                <div id="contentDetailLocation" class="contentDetailLocation">
                     <label>
                         latitude, longitude
                     </label>
                 </div>
             </div>
             <hr />
+            -->
         </div>
     </main>
 </body>
