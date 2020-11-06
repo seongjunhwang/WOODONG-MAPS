@@ -72,16 +72,10 @@
                 headers: { 'token_give': $.cookie('mytoken') },
                 data: {},
                 success: function (response) {
-                    if (response['result'] == 'success') {
-                        // 올바른 결과값을 받으면 nickname을 입력해줍니다.
-                        $('#nickname').text(response['nickname'])
-                    } else {
-                        // 에러가 나면 메시지를 띄우고 로그인 창으로 이동합니다.
-                        alert(response['msg'])
-                        window.location.href = '/login'
-                    }
+                    $('#nickname').text(response['nickname'])
                 }
-            })
+            }
+            )
         }
 
 
@@ -230,6 +224,7 @@
             </div>
         </div>
         <div id="contentsList" class="contentsList">
+            <!--
             <div class="content">
                 <a href="/content">
                     <div class="contentBody">
@@ -255,6 +250,7 @@
                     <div class="contentCreatedTime">2020-10-03 오전 11:02</div>
                 </div>
             </div>
+        -->
         </div>
         <div class="contentCreate">
             <form action="create">

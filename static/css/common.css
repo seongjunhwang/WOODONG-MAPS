@@ -117,6 +117,18 @@ a {
     width: 28%;
 }
 
+.contentCreateImage {
+    margin: 10px 0px 10px 0px;
+}
+
+.contentCreateTitle {
+    margin: 10px 0px 10px 0px;
+}
+
+.contentCreateDesc {
+    margin: 10px 0px 10px 0px;
+}
+
 .contentDetail {
     padding: 10px 10px 10px 10px;
 }
@@ -210,6 +222,14 @@ a {
     font-weight: normal;
 }
 
+.loginInputId {
+    margin: 10px 0px 10px 0px;
+}
+
+.loginInputPassword {
+    margin: 10px 0px 10px 0px;
+}
+
 .loginBody {
     margin: 10px 10px 30px 10px;
 }
@@ -230,4 +250,16 @@ a {
 
 .joinBody {
     margin: 10px 10px 30px 10px;
+}
+
+.joinInputId {
+    margin: 10px 0px 10px 0px;
+}
+
+.joinInputPassword {
+    margin: 10px 0px 10px 0px;
+}
+
+.joinInputNickname {
+    margin: 10px 0px 10px 0px;
 }
