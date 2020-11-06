@@ -50,7 +50,7 @@
             let image = document.getElementById("contentImage").getAttribute("src");
             let title = document.getElementById("contentTitle").value;
             let desc = document.getElementById("contentDesc").value;
-            let uid = $.cookie('mytoken');
+            let token = $.cookie('mytoken');
             let createdtime = new Date().toLocaleString();
 
             $.ajax({
@@ -62,7 +62,7 @@
                     'image': image,
                     'title': title,
                     'desc': desc,
-                    'uid': uid,
+                    'token': token,
                     'createdtime': createdtime
                 },
                 success: function (response) {
