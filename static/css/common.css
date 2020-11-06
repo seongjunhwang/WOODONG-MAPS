@@ -66,6 +66,7 @@ a {
 .contentBody {
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 
 .contentTownBadge {
@@ -87,6 +88,11 @@ a {
     font-size: 12px;
 }
 
+.contentImage {
+    position: absolute;
+    right: 0px;
+}
+
 .contentImage img {
     width: 100px;
     height: 100px;
@@ -94,6 +100,7 @@ a {
 }
 
 .contentFooter {
+    position: relative;
     display: flex;
     flex-direction: row;
     font-size: 12px;
@@ -101,11 +108,16 @@ a {
 }
 
 .contentCreator {
+    position: absolute;
+    top: 180px;
     width: 50%;
     text-align: left;
 }
 
 .contentCreatedTime {
+    position: absolute;
+    top: 180px;
+    right: 0px;
     width: 50%;
     text-align: right;
 }
