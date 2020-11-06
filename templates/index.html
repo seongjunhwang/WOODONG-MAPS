@@ -18,6 +18,10 @@
     <script type="text/javascript"
         src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=5h7phq9a8i"></script>
 
+    <!--navermaps geocoder module api-->
+    <script type="text/javascript"
+        src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=YOUR_CLIENT_ID&submodules=geocoder"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -26,6 +30,18 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } else {
+                    alert("위치를 불러오는 데 실패하였습니다.");
+                }
+            }
+        );
+    </script>
     <script>
         // 로딩 후 바로 실행
         $(document).ready(function () {
@@ -56,16 +72,53 @@
     </script>
 
 
+
+
 </head>
 
 <body>
     <div class="map" id="map">
         <script>
-            var mapOptions = {
-                center: new naver.maps.LatLng(37.3595704, 127.105399),
-                zoom: 16,
-            };
-            var map = new naver.maps.Map("map", mapOptions);
+            var map = new naver.maps.Map('map', {
+                center: new naver.maps.LatLng(37.5666805, 126.9784147),
+                zoom: 10,
+                mapTypeId: naver.maps.MapTypeId.NORMAL
+            });
+
+            var infowindow = new naver.maps.InfoWindow();
+
+            function onSuccessGeolocation(position) {
+                var location = new naver.maps.LatLng(position.coords.latitude,
+                    position.coords.longitude);
+
+                map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+                map.setZoom(16); // 지도의 줌 레벨을 변경합니다.
+
+                infowindow.setContent('<div style="padding:20px;">' + '주변 동네의 소식을 알려주세요.' + '</div>');
+
+                infowindow.open(map, location);
+                console.log('Coordinates: ' + location.toString());
+            }
+
+            function onErrorGeolocation() {
+                var center = map.getCenter();
+
+                infowindow.setContent('<div style="padding:20px;">' +
+                    '<h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>' + "latitude: " + center.lat() + "<br />longitude: " + center.lng() + '</div>');
+
+                infowindow.open(map, center);
+            }
+
+            $(window).on("load", function () {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(onSuccessGeolocation, onErrorGeolocation);
+                } else {
+                    var center = map.getCenter();
+                    infowindow.setContent('<div style="padding:20px;"><h5 style="margin-bottom:5px;color:#f00;">Geolocation not supported</h5></div>');
+                    infowindow.open(map, center);
+                }
+            });
+
         </script>
     </div>
     <main>
@@ -82,16 +135,6 @@
             </div>
             <script>
                 let x = document.getElementById("location");
-
-                $(document).ready(
-                    function getLocation() {
-                        if (navigator.geolocation) {
-                            navigator.geolocation.getCurrentPosition(showPosition);
-                        } else {
-                            x.innerHTML = "위치를 불러오는 데 실패하였습니다.";
-                        }
-                    }
-                );
 
                 function showPosition(position) {
                     x.innerHTML = `
