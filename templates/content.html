@@ -18,9 +18,10 @@
     <script type="text/javascript"
         src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=5h7phq9a8i"></script>
 
-
     <script>
-
+        let urlParams = new URLSearchParams(window.location.search);
+        let myParam = urlParams.get('id')
+        console.log(myParam)
     </script>
 </head>
 
@@ -68,6 +69,7 @@
             });
 
         </script>
+
     </div>
     <main>
         <div class="header">

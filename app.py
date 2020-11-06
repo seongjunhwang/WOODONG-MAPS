@@ -3,6 +3,7 @@ import datetime
 import jwt
 from pymongo import MongoClient
 from flask import Flask, render_template, jsonify, request, session, redirect, url_for
+import uuid
 
 app = Flask(__name__)
 
@@ -50,7 +51,7 @@ def api_users():
 
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
 
-    db.user.insert_one(
+    db.users.insert_one(
         {'id': id_receive, 'pw': pw_hash, 'nick': nickname_receive})
 
     return jsonify({'result': 'success'})
@@ -68,7 +69,7 @@ def api_login():
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
 
     # id, 암호화된pw을 가지고 해당 유저를 찾습니다.
-    result = db.user.find_one({'id': id_receive, 'pw': pw_hash})
+    result = db.users.find_one({'id': id_receive, 'pw': pw_hash})
 
     # 찾으면 JWT 토큰을 만들어 발급합니다.
     if result is not None:
@@ -111,7 +112,7 @@ def api_valid():
 
         # payload 안에 id가 들어있습니다. 이 id로 유저정보를 찾습니다.
         # 여기에선 그 예로 닉네임을 보내주겠습니다.
-        userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
+        userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
         return jsonify({'result': 'success', 'nickname': userinfo['nick']})
     except jwt.ExpiredSignatureError:
         # 위를 실행했는데 만료시간이 지났으면 에러가 납니다.
@@ -127,28 +128,26 @@ def api_create_contents():
     desc = request.form['desc']
     token = request.form['token']
     createdtime = request.form['createdtime']
-
     payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
-    userid = db.user.find_one({'id': payload['id']}, {'_id': 0, 'id': 1})
-    usernick = db.user.find_one({'id': payload['id']}, {'_id': 0, 'nick': 1})
-
+    userid = db.users.find_one({'id': payload['id']}, {'_id': 0, 'id': 1})
+    usernick = db.users.find_one({'id': payload['id']}, {'_id': 0, 'nick': 1})
     db.contents.insert_one(
         {
+            'contentid': uuid.uuid4().hex[:8],
+            'createdtime': createdtime,
             'latitude': lat,
             'longitude': lng,
-            'image': image,
-            'title': title,
-            'desc': desc,
             'userid': userid['id'],
             'usernick': usernick['nick'],
-            'createdtime': createdtime
+            'image': image,
+            'title': title,
+            'desc': desc
         }
     )
-
     return jsonify({'result': 'success', 'msg': '게시글 등록이 완료되었습니다.'})
 
 
-@app.route('/api/contents', methods=['GET'])
+@ app.route('/api/contents', methods=['GET'])
 def api_read_contents():
 
     contents = list(db.contents.find(
