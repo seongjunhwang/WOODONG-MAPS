@@ -101,7 +101,7 @@ def create_contents():
     image = request.form['image']
     title = request.form['title']
     desc = request.form['desc']
-    uid = "test_user1"
+    uid = request.form['uid']
 
     db.contents.insert_one(
         {

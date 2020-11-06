@@ -29,6 +29,19 @@
         crossorigin="anonymous"></script>
 
     <script>
+        $(document).ready(function () {
+            if ($.cookie('mytoken') == undefined) {
+                // mytoken이라는 값으로 쿠키가 없으면, 로그인 창으로 이동시킵니다.
+                return;
+            } else {
+                // 쿠기가 있으면, 유저 정보를 불러옵니다.
+                alert("이미 로그인된 상태입니다.");
+                window.location.href = '/'
+            }
+        });
+    </script>
+
+    <script>
         // ['쿠키'라는 개념에 대해 알아봅시다]
         // 로그인을 구현하면, 반드시 쿠키라는 개념을 사용합니다.
         // 페이지에 관계없이 브라우저에 임시로 저장되는 정보입니다. 키:밸류 형태(딕셔너리 형태)로 저장됩니다.
@@ -64,11 +77,46 @@
 <body>
     <div class="map" id="map">
         <script>
-            var mapOptions = {
-                center: new naver.maps.LatLng(37.3595704, 127.105399),
+            var map = new naver.maps.Map('map', {
+                center: new naver.maps.LatLng(37.5666805, 126.9784147),
                 zoom: 16,
-            };
-            var map = new naver.maps.Map("map", mapOptions);
+                mapTypeId: naver.maps.MapTypeId.NORMAL
+            });
+
+            var infowindow = new naver.maps.InfoWindow();
+
+            function onSuccessGeolocation(position) {
+                var location = new naver.maps.LatLng(position.coords.latitude,
+                    position.coords.longitude);
+
+                map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+                map.setZoom(16); // 지도의 줌 레벨을 변경합니다.
+
+                infowindow.setContent('<div style="padding:20px;">' + '주변 동네의 소식을 알려주세요.' + '</div>');
+
+                infowindow.open(map, location);
+                console.log('Coordinates: ' + location.toString());
+            }
+
+            function onErrorGeolocation() {
+                var center = map.getCenter();
+
+                infowindow.setContent('<div style="padding:20px;">' +
+                    '<h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>' + "latitude: " + center.lat() + "<br />longitude: " + center.lng() + '</div>');
+
+                infowindow.open(map, center);
+            }
+
+            $(window).on("load", function () {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(onSuccessGeolocation, onErrorGeolocation);
+                } else {
+                    var center = map.getCenter();
+                    infowindow.setContent('<div style="padding:20px;"><h5 style="margin-bottom:5px;color:#f00;">Geolocation not supported</h5></div>');
+                    infowindow.open(map, center);
+                }
+            });
+
         </script>
     </div>
     <main>
