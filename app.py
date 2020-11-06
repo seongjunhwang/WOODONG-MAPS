@@ -120,13 +120,14 @@ def api_valid():
 
 
 @app.route('/api/contents', methods=['POST'])
-def create_contents():
+def api_create_contents():
     lat = request.form['lat']
     lng = request.form['lng']
     image = request.form['image']
     title = request.form['title']
     desc = request.form['desc']
     uid = request.form['uid']
+    createdtime = request.form['createdtime']
 
     db.contents.insert_one(
         {
@@ -135,12 +136,22 @@ def create_contents():
             'image': image,
             'title': title,
             'desc': desc,
-            'uid': uid
+            'uid': uid,
+            'createdtime': createdtime
         }
     )
 
     return jsonify({'result': 'success', 'msg': '게시글 등록이 완료되었습니다.'})
 
+
+'''
+@app.route('/api/contents', methods=['GET'])
+def api_read_contents():
+    
+    contents = list(db.contents.find({},{'_id' : false}).sort(''))
+
+    return jsonify({'result': 'success', 'msg': '리스트 조회가 완료되었습니다.'})
+'''
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

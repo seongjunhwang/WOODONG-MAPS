@@ -51,6 +51,7 @@
             let title = document.getElementById("contentTitle").value;
             let desc = document.getElementById("contentDesc").value;
             let uid = $.cookie('mytoken');
+            let createdtime = new Date().toLocaleString();
 
             $.ajax({
                 type: "POST",
@@ -62,6 +63,7 @@
                     'title': title,
                     'desc': desc,
                     'uid': uid,
+                    'createdtime': createdtime
                 },
                 success: function (response) {
                     if (response["result"] == "success") {
