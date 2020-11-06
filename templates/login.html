@@ -29,19 +29,6 @@
         crossorigin="anonymous"></script>
 
     <script>
-        $(document).ready(function () {
-            if ($.cookie('mytoken') == undefined) {
-                // mytoken이라는 값으로 쿠키가 없으면, 로그인 창으로 이동시킵니다.
-                return;
-            } else {
-                // 쿠기가 있으면, 유저 정보를 불러옵니다.
-                alert("이미 로그인된 상태입니다.");
-                window.location.href = '/'
-            }
-        });
-    </script>
-
-    <script>
         // ['쿠키'라는 개념에 대해 알아봅시다]
         // 로그인을 구현하면, 반드시 쿠키라는 개념을 사용합니다.
         // 페이지에 관계없이 브라우저에 임시로 저장되는 정보입니다. 키:밸류 형태(딕셔너리 형태)로 저장됩니다.

@@ -34,11 +34,11 @@
             $.ajax({
                 type: "POST",
                 url: "/api/register",
-                data: { id_give: $('#userid').val(), pw_give: $('#userpw').val() },
+                data: { id_give: $('#userid').val(), pw_give: $('#userpw').val(), nickname_give: $('#usernick').val() },
                 success: function (response) {
                     if (response['result'] == 'success') {
                         alert('회원가입이 완료되었습니다.')
-                        window.location.href = '/login'
+                        window.location.href = '/'
                     } else {
                         alert(response['msg'])
                     }
@@ -112,6 +112,9 @@
             </div>
             <div class="joinInputPassword">
                 <input id="userpw" type="password" class="form-control" placeholder="비밀번호를 입력해주세요.">
+            </div>
+            <div class="joinInputNickname">
+                <input id="usernick" class="form-control" placeholder="닉네임을 입력해주세요.">
             </div>
             <div class="joinStart">
                 <form action="#">
