@@ -23,7 +23,23 @@
         let myParam = urlParams.get('id')
         console.log(myParam)
     </script>
+
     <script>
+        function coordsToAddress3(latitude, longitude) {
+            let address3;
+            $.ajax({
+                type: "GET",
+                async: false,
+                url: `/api/coordsToAddress/${longitude},${latitude}`,
+                data: {},
+                success: function (response) {
+                    address3 = response.address.results[1].region.area3.name
+                }
+            }
+            )
+            return address3;
+        }
+
         $.ajax({
             type: "GET",
             url: "/api/contents",
@@ -41,9 +57,10 @@
                         let desc = content['desc'];
                         let usernick = content['usernick'];
                         let createdtime = content['createdtime'];
+                        let address3 = coordsToAddress3(latitude, longitude)
                         let tempHtml = `
                             <div class="contentDetailHeader">
-                                <div class="contentDetailTownBadge">교남동</div>
+                                <div class="contentDetailTownBadge">${address3}</div>
                                 <div class="contentDetailTitle">
                                     <h5>${title}</h5>
                                 </div>
