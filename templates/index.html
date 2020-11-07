@@ -77,13 +77,30 @@
             alert('로그아웃!')
             window.location.href = '/'
         }
+        function coordsToAddress3(latitude, longitude) {
+            let address3;
+            $.ajax({
+                type: "GET",
+                async: false,
+                url: `/api/coordsToAddress/${longitude},${latitude}`,
+                data: {},
+                success: function (response) {
+                    address3 = response.address.results[1].region.area3.name
+                }
+            }
+            )
+            return address3;
+        }
+
         $(document).ready(
+
             function showContents() {
                 $.ajax({
                     type: "GET",
                     url: "api/contents",
                     data: {},
                     success: function (response) {
+
                         let contents = response['contents_list']
                         for (let i = 0; i < contents.length; i++) {
                             let content = contents[i]
@@ -96,13 +113,16 @@
                             let desc = content['desc']
                             let usernick = content['usernick']
                             let createdtime = content['createdtime']
+                            let address3 = coordsToAddress3(latitude, longitude)
+                            console.log(latitude, longitude)
+                            console.log(address3)
                             let tempHtml = `
                                 <div class="content">
                                     <a href="/content?id=${contentid}">
                                         <div class="contentBody">
                                             <div class="contentText">
                                                 <div class="contentTownBadge">
-                                                    교남동
+                                                    ${address3}
                                                 </div>
                                                 <div class="contentTitle">
                                                     <h5>${title}</h5>
@@ -131,6 +151,7 @@
             }
         );
     </script>
+
 </head>
 
 <body>
