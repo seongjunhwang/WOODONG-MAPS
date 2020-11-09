@@ -105,7 +105,6 @@
                         for (let i = 0; i < contents.length; i++) {
                             let content = contents[i]
                             let contentid = content['contentid']
-                            console.log('-----------', contentid)
                             let latitude = content['latitude']
                             let longitude = content['longitude']
                             let image = content['image']
@@ -114,35 +113,43 @@
                             let usernick = content['usernick']
                             let createdtime = content['createdtime']
                             let address3 = coordsToAddress3(latitude, longitude)
+
+                            console.log('-----------', contentid)
+                            let marker = new naver.maps.Marker({
+                                position: new naver.maps.LatLng(latitude, longitude),
+                                map: map
+                            });
+
                             let tempHtml = `
-                                <div class="content">
-                                    <a href="/content?id=${contentid}">
-                                        <div class="contentBody">
-                                            <div class="contentText">
-                                                <div class="contentTownBadge">
-                                                    ${address3}
+                                    <div class="content">
+                                        <a href="/content?id=${contentid}">
+                                            <div class="contentBody">
+                                                <div class="contentText">
+                                                    <div class="contentTownBadge">
+                                                        ${address3}
+                                                    </div>
+                                                    <div class="contentTitle">
+                                                        <h5>${title}</h5>
+                                                    </div>
+                                                    <div class="contentDesc">
+                                                        <p>
+                                                            ${desc}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div class="contentTitle">
-                                                    <h5>${title}</h5>
+                                                    <div class="contentImage">
+                                                        <img src="${image}">
+                                                    </div>
                                                 </div>
-                                                <div class="contentDesc">
-                                                    <p>
-                                                        ${desc}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                                <div class="contentImage">
-                                                    <img src="${image}">
-                                                </div>
-                                            </div>
-                                        </a>
-                                    <div class="contentFooter">
-                                        <div class="contentCreator">${usernick}</div>
-                                        <div class="contentCreatedTime">${createdtime}</div>
+                                            </a>
+                                        <div class="contentFooter">
+                                            <div class="contentCreator">${usernick}</div>
+                                            <div class="contentCreatedTime">${createdtime}</div>
+                                        </div>
                                     </div>
-                                </div>
-                                `
+                                    `
                             $('#contentsList').append(tempHtml)
+
                         }
                     }
                 })
@@ -160,15 +167,13 @@
                 zoom: 16,
                 mapTypeId: naver.maps.MapTypeId.NORMAL
             });
+
             var infowindow = new naver.maps.InfoWindow();
             function onSuccessGeolocation(position) {
                 var location = new naver.maps.LatLng(position.coords.latitude,
                     position.coords.longitude);
                 map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
                 map.setZoom(16); // 지도의 줌 레벨을 변경합니다.
-                infowindow.setContent('<div style="padding:20px;">' + '주변 동네의 소식을 알려주세요.' + '</div>');
-                infowindow.open(map, location);
-                console.log('Coordinates: ' + location.toString());
             }
             function onErrorGeolocation() {
                 var center = map.getCenter();
@@ -193,13 +198,11 @@
             <div class="logoText">in</div>
             <div id="location" class="townSelect">
                 <select class="form-control">
-                    <option>종로구 교남동</option>
-                    <option>종로구 홍파동</option>
-                    <option>종로구 교북동</option>
-                    <option>...</option>
+                    <option>테스트</option>
                 </select>
             </div>
             <script>
+
                 let x = document.getElementById("location");
 
                 function showPosition(position) {
@@ -215,7 +218,9 @@
                                 <select class="form-control">
                                     <option>${address3}</option>
                                 </select>
-                            `;
+                            `
+                            return address3
+                                ;
                         }
                     }
                     )
