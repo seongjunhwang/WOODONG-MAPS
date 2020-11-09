@@ -45,7 +45,8 @@
                 // mytoken이라는 값으로 쿠키가 없으면, 홈으로 이동시킵니다.
                 myPage.innerHTML = `
                     <a href="/login">
-                        로그인
+                        <img src = "../static/img/log-in.png" style = "margin: 0px 10px">
+                        <span style = "font-size : 12px ; display : block ; color : #a503fc ; text-align : center">로그인</span>
                     </a>
                 `;
             } else {
@@ -53,7 +54,8 @@
                 load_user_info()
                 myPage.innerHTML = `
                     <a href="#" onclick="logout()">
-                        <span id="nickname"></span> 로그아웃
+                        <img src = "../static/img/log-out.png" style = "margin: 0px 10px">
+                        <span id="nickname" style="font-size : 12px ; display : block ; color : #a503fc ; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width : 50px;"></span>
                     </a>
                 `;
             }
