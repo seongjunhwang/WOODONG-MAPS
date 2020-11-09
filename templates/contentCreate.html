@@ -51,7 +51,7 @@
             let title = document.getElementById("contentTitle").value;
             let desc = document.getElementById("contentDesc").value;
             let token = $.cookie('mytoken');
-            let createdtime = new Date().toLocaleString();
+            let createdtime = new Date().toISOString();
 
             $.ajax({
                 type: "POST",
