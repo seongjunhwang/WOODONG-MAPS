@@ -73,6 +73,21 @@
                 }
             })
         }
+
+        function coordsToAddress3(latitude, longitude) {
+            let address3;
+            $.ajax({
+                type: "GET",
+                async: false,
+                url: `/api/coordsToAddress/${longitude},${latitude}`,
+                data: {},
+                success: function (response) {
+                    address3 = response.address.results[1].region.area3.name
+                }
+            }
+            )
+            return address3;
+        }
     </script>
 
 </head>
@@ -126,9 +141,9 @@
         <div class="header">
             <a href="/"><img src="/static/img/goToBack.png" alt="홈 화면으로 이동" /></a>
         </div>
-        <div class="contentCreateHeader">
+        <div id="contentCreateHeader" class="contentCreateHeader">
             <h1>
-                교남동 소식들</br>
+                교남동 소식을</br>
                 올려보세요.
             </h1>
         </div>
@@ -138,12 +153,42 @@
                     교남동 어느 곳의 소식인가요?
                 </label>
                 <form action="">
-                    <button type="button" class="btn btn-outline-primary btn-block" onclick="getLocation()">지도에서
-                        찾기</button>
+                    <button type="button" class="btn btn-outline-primary btn-block" onclick="getLocation()">현재 위치로
+                        등록</button>
                 </form>
             </div>
             <script>
                 let x = document.getElementById("location");
+                let z = document.getElementById("contentCreateHeader");
+
+                $(document).ready(
+                    function getLocation_fisrt() {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(showPosition_first);
+                        } else {
+                            alert("위치를 불러오는 데 실패하였습니다.");
+                        }
+                    }
+                );
+
+                function showPosition_first(position) {
+                    let address = coordsToAddress3(position.coords.latitude, position.coords.longitude);
+                    z.innerHTML = `
+                        <h1>
+                            ${address} 소식을</br>
+                            올려보세요.
+                        </h1>
+                    `
+                    x.innerHTML = `
+                        <label>
+                            ${address} 어느 곳의 소식인가요?
+                        </label>
+                        <form action="">
+                        <button type="button" class="btn btn-outline-primary btn-block" onclick="getLocation()">현재 위치로
+                        등록</button>
+                        </form>
+                    `
+                };
 
                 function getLocation() {
                     if (navigator.geolocation) {
@@ -154,15 +199,23 @@
                 }
 
                 function showPosition(position) {
+                    let address = coordsToAddress3(position.coords.latitude, position.coords.longitude);
                     x.innerHTML = `
                         <label>
-                            교남동 어느 곳의 소식인가요?
+                            ${address} 어느 곳의 소식인가요?
                         </label>
                         <input class="form-control" type="text" id="position"
                             placeholder="${position.coords.latitude}, ${position.coords.longitude}" readonly>
-                        <a href="#"> <small class="form-text" style= "text-align:right ; color:violet">다시 등록하기</small></a>
                     `;
+
+                    let marker = new naver.maps.Marker({
+                        position: new naver.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                        map: map
+                    });
+
+                    infowindow.close();
                 }
+
             </script>
 
             <!--
@@ -222,12 +275,12 @@
 
                 function showImage() {
                     y.innerHTML = `
-                    <label>
+                    <label style = "display: block">
                         사진도 함께 올려보세요.
                     </label>
                     <img id="contentImage" src="#" alt="이미지 샘플" />
-                    <a href="#"><small class="form-text">다시 등록하기</small></a>
                     `;
+
                     let contentImage = document.querySelector('#contentImage');
                 }
             </script>
