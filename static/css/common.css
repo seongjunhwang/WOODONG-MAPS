@@ -52,6 +52,7 @@ a {
 }
 
 .contentsList {
+    margin: 0px 0px 50px 0px;
     padding: 10px 10px 10px 10px;
 }
 
@@ -68,6 +69,11 @@ a {
     flex-direction: row;
     position: relative;
     color: #363636;
+    flex-wrap: nowrap;
+}
+
+.contentText {
+    width: 250px;
 }
 
 .contentTownBadge {
@@ -83,14 +89,21 @@ a {
 .contentBody h5 {
     font-size: 15px;
     font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .contentBody p {
     font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .contentImage {
     position: absolute;
+    margin: 5px;
     right: 0px;
 }
 
@@ -110,14 +123,14 @@ a {
 
 .contentCreator {
     position: absolute;
-    top: 10px;
+    top: 20px;
     width: 50%;
     text-align: left;
 }
 
 .contentCreatedTime {
     position: absolute;
-    top: 10px;
+    top: 20px;
     right: 0px;
     width: 50%;
     text-align: right;
