@@ -58,6 +58,10 @@
                         let usernick = content['usernick'];
                         let createdtime = content['createdtime'];
                         let address3 = coordsToAddress3(latitude, longitude)
+                        let createddate = createdtime.split('T')[0]
+                        let createdyear = createdtime.split('T')[0].split('-')[0]
+                        let createdmonth = createdtime.split('T')[0].split('-')[1]
+                        let createdday = createdtime.split('T')[0].split('-')[2]
                         let tempHtml = `
                             <div class="contentDetailHeader">
                                 <div class="contentDetailTownBadge">${address3}</div>
@@ -66,7 +70,7 @@
                                 </div>
                                 <div class="contentDetailFooter">
                                     <div class="contentDetailCreator">${usernick}</div>
-                                    <div class="contentDetailCreatedTime">${createdtime}</div>
+                                    <div class="contentDetailCreatedTime">${createdyear}년 ${createdmonth}월 ${createdday}일</div>
                                 </div>
                             </div>
                             <hr />

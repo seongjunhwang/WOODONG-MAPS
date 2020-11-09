@@ -190,8 +190,10 @@ a {
 }
 
 .contentDetailLocation {
+    font-size: 12px;
     text-align: right;
     color: violet;
+    padding: 10px 0px;
 }
 
 .contentDetailFooter {
