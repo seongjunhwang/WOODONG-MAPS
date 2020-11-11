@@ -162,8 +162,8 @@ def api_read_contents():
 @app.route('/api/coordsToAddress/<coords>', methods=['GET'])
 def api_coords_to_address(coords):
 
-    client_id = '5h7phq9a8i'
-    client_secret = 'zmXRdAWu3QSyafJEneva4vKY3AXN2TRZdKtrXSU7'
+    client_id = '{}'
+    client_secret = '{}'
 
     headers = {
         'X-NCP-APIGW-API-KEY-ID': client_id,
